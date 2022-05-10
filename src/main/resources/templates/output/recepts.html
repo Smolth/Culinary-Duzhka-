@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Все рецепты</title>
+</head>
+<body>
+<p th:text="'Список рецептов:'">Value</p>
+<div th:each="recept : ${recipes}">
+    <a th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
+</div>
+</body>
+</html>

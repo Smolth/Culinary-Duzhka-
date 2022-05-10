@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Рецепт</title>
+</head>
+<body>
+<p th:text="${recept.getHead()}">VALUE</p>
+<p th:text="'Ингредиенты:'">VALUE</p>
+<div th:each="ingredient : ${recept.getIngredients()}">
+    <a th:text="${ingredient}">Ingredient</a>
+</div>
+<p th:text="'Подготовка:'">VALUE</p>
+<div th:each="preparation : ${recept.getPreparation()}">
+    <a th:text="${preparation}">Preparation</a>
+</div>
+<p th:text="'Приготовление:'">VALUE</p>
+<div th:each="recipe : ${recept.getRecipe()}">
+    <a th:text="${recipe}">Recipe</a>
+</div>
+<a href = "/">Вернуться к рецептам</a>
+<a href = "/greeting">Вернуться на главную страницу</a>
+</body>
+</html>
