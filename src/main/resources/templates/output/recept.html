@@ -3,22 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Рецепт</title>
+    <style>
+        H2 {
+            font-size: 120%;
+            font-family: "Times New Roman", serif;
+            color: Teal;
+        }
+        H1 {
+            font-size: 130%;
+            font-variant: small-caps;
+            font-family: "Arial Hebrew", sans-serif;
+            color: #2F4F4F;
+        }
+        .my_link {
+            color: DarkOrange;
+            font-size: 100%;
+            font-family: "Verdana", cursive;
+            display: inline-block;
+            width: 600px;
+            text-align: center;
+        }
+        .my_img{
+            width:304px;
+            height:228px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px;
+            background: Aquamarine;
+
+        }
+    </style>
 </head>
-<body>
-<p th:text="${recept.getHead()}">VALUE</p>
-<p th:text="'Ингредиенты:'">VALUE</p>
-<div th:each="ingredient : ${recept.getIngredients()}">
+<body th:bgcolor="Lavender">
+
+<h1 th:align="center" th:text="${recept.getHead()}">value</h1>
+<img th:src="@{${recept.getImage()}}" class="my_img" alt=""/>
+<h2 th:align="center" th:text="'Ингредиенты:'">VALUE</h2>
+<div style="color:royalblue" th:each="ingredient : ${recept.getIngredients()}">
     <a th:text="${ingredient}">Ingredient</a>
-</div>
-<p th:text="'Подготовка:'">VALUE</p>
+</div></br>
+
+</br>
+<h2 th:align="center" th:text="'Подготовка:'">VALUE</h2>
 <div th:each="preparation : ${recept.getPreparation()}">
     <a th:text="${preparation}">Preparation</a>
-</div>
-<p th:text="'Приготовление:'">VALUE</p>
+</div> </br>
+<h2 th:align="center" th:text="'Приготовление:'">VALUE</h2>
 <div th:each="recipe : ${recept.getRecipe()}">
     <a th:text="${recipe}">Recipe</a>
 </div>
-<a href = "/">Вернуться к рецептам</a>
-<a href = "/greeting">Вернуться на главную страницу</a>
+</br>
+</br>
+<div >
+    <a class="my_link" href = "/allRecipes">Перейти ко всем рецептам</a>
+    <a class="my_link" href = "/">Вернуться на главную страницу</a>
+</div>
 </body>
 </html>

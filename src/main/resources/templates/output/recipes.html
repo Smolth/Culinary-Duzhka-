@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Найденные рецепты</title>
+    <style>
+        H1 {
+            font-size: 130%;
+            font-family: "Arial", sans-serif;
+            color: LightPink;
+            text-align: center;
+        }
+        H2 {
+            font-size: 100%;
+            font-family: "Times New Roman", serif;
+            color: Brown;
+            margin-right: 650px;
+        }
+        .my_link {
+            color: SlateBlue;
+            font-size: 130%;
+            line-height: 1.5;
+            font-family: Verdana;
+            display: block;
+            margin-left: 50px;
+
+        }
+        BODY {
+            background: url(/img/oboi.jpeg); /* Путь к графическому файлу со вторым фоном */
+        }
+    </style>
+</head>
+<body th:bgcolor="LightPink">
+<h1 th:text="'Кажется, у вас недостаточно продуктов для создания полноценного блюда, но мы подобрали рецепты блюд, которые пойдойдут вам, если добавить немного ингредиентов:'">Value</h1>
+<br/>
+<div th:each="recept : ${recipes}">
+    <a class="my_link" style="text-decoration: underline; text-decoration: none;" th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
+    <h2 th:text="'   - ' + ${recept.getAdding()}">add</h2><br/>
+</div>
+
+<a style="font-size: 120%; color: Purple; text-align: center; display: block; font-family: Verdana, cursive" href = "/">Вернуться на главную страницу</a>
+</body>
+</html>

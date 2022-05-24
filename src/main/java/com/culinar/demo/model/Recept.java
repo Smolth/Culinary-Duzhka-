@@ -3,17 +3,21 @@ package com.culinar.demo.model;
 public class Recept {
     private int id;
     private String head;
+    private String image;
     private String[] ingredients;
     private String[] preparation;
     private String[] recipe;
+    private String adding;
 
-    public Recept(){;}
-    public Recept(int id, String head, String[] ingredients, String[] preparation, String[] recipe) {
+    public Recept(){}
+    public Recept(int id, String head, String image, String[] ingredients, String[] preparation, String[] recipe, String adding) {
         this.id = id;
         this.head = head;
+        this.image = image;
         this.ingredients = ingredients;
         this.preparation = preparation;
         this.recipe = recipe;
+        this.adding = adding;
     }
 
     public int getId() {
@@ -31,6 +35,10 @@ public class Recept {
     public void setHead(String head) {
         this.head = head;
     }
+
+    public String getImage() {return image;}
+
+    public void setImage(String image) {this.image = image;}
 
     public String[] getIngredients() {
         return ingredients;
@@ -56,19 +64,13 @@ public class Recept {
         this.recipe = recipe;
     }
 
-    public void cook(String a) {
-        String b;
-        switch (a) {
-            case "Carrot":
-                b = "Link of recept with Carrot";
-                break;
-            case "Potato":
-                b = "Link of recept with Potato";
-                break;
-            default:
-                b = "Link with your ingredient not exist";
-        }
-
+    public String getAdding() {
+        return adding;
     }
+
+    public void setAdding(String adding) {
+        this.adding = adding;
+    }
+
 
 }

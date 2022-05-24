@@ -2,7 +2,7 @@ package com.culinar.demo.model;
 
 public enum Ingredient {
 
-    Carrot, Tomato, Cucumber, Pepper, Eggplant, Squash, ColoredCabbage, WhiteCabbage, Potato, Beetroot, Pumpkin, Corn, RedOnion, Onion, Radish, Horseradish, Garlic,
+    /*Carrot, Tomato, Cucumber, Pepper, Eggplant, Squash, ColoredCabbage, WhiteCabbage, Potato, Beetroot, Pumpkin, Corn, RedOnion, Onion, Radish, Horseradish, Garlic,
     Apple, Pear, Banana, Nectarine, Apricot, Plum, Orange, Tangerine, Grapefruit, Pomegranate, Mango, Avocado, Lemon, Pineapple, Kiwi, Persimmon,
     MincedMeat, Wings, Breast, Fillet, Shin, Liver, Ribs, Bird, Tenderloin,
     Fish,
@@ -14,5 +14,9 @@ public enum Ingredient {
     Felix,
     Mushrooms,
     Yeast, BakingPowder, Powder, Glaze, Sugar, Cinnamon, PoppySeeds, Flour, ConfectionerySprinkles
+*/
 
+      мандарин, манго,
+              шейка,
+     Феликс
 }

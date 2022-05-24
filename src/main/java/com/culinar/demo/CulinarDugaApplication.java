@@ -18,14 +18,8 @@ import java.util.List;
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class})
 public class CulinarDugaApplication {
 
-	public static void main(String[] args) throws SQLException {
-		ReceptDAO result = new ReceptDAO();
-		List<Recept> list = result.index();
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getHead());
-			String msg = java.util.Arrays.toString(list.get(i).getIngredients());
-			System.out.println(msg);
-		}
+	public static void main(String[] args){
+
 		SpringApplication.run(CulinarDugaApplication.class, args);
 
 	}
