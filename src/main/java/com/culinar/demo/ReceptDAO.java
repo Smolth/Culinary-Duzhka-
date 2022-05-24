@@ -104,7 +104,7 @@ public List<Recept> searchByIngredients(String[] ingredients) {
         int id;
 
         try {
-            ArrayList<String> products = new ArrayList<>();
+            ArrayList<String> products;
             PreparedStatement preparedStatement = connection.prepareStatement("" +
                     "Select id, ingredients " +
                     "from recept");
@@ -112,6 +112,7 @@ public List<Recept> searchByIngredients(String[] ingredients) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
+                products = new ArrayList<>();
                 id = rs.getInt("id");
                 Array dataIngredients = rs.getArray("ingredients");
                 String[] str_ingredients = (String[]) dataIngredients.getArray();
