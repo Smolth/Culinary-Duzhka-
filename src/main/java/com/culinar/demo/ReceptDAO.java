@@ -14,6 +14,8 @@ public class ReceptDAO {
     private static final String password = "";
 
     private static Connection connection;
+    
+    private static boolean flag = false;
 
     static {
         try {
@@ -47,6 +49,8 @@ public class ReceptDAO {
                 Array recipe = resultSet.getArray(5);
                 String[] str_recipe = (String[])recipe.getArray();
                 recept.setRecipe(str_recipe);
+                
+                recept.setAdding(resultSet.getString("adding"));
 
                 recipes.add(recept);
             }
@@ -79,6 +83,8 @@ public class ReceptDAO {
         Array recipe = resultSet.getArray(5);
         String[] str_recipe = (String[])recipe.getArray();
         recept.setRecipe(str_recipe);
+            
+        recept.setAdding(resultSet.getString("adding"));    
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
