@@ -2,12 +2,29 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Все рецепты</title>
+    <title>Рецепты</title>
+    <style>
+        H2 {
+            font-size: 125%;
+            font-family: "Arial", sans-serif;
+            color: LightSalmon;
+        }
+
+        .my_link {
+            color: DarkGreen;
+            font-size: 120%;
+            font-family: "Times New Roman", serif;
+            line-height: 1.5;
+        }
+    </style>
 </head>
-<body>
-<p th:text="'Список рецептов:'">Value</p>
-<div th:each="recept : ${recipes}">
-    <a th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
+<body th:bgcolor="PowderBlue">
+<h2 th:align="center" th:text="'Список рецептов:'">Value</h2>
+<div class="my_link" th:each="recept : ${recipes}">
+    <a style="text-decoration: underline; text-decoration: none;" th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
 </div>
+<br/>
+<br/>
+<a style="font-size: 120%; color: darkslateblue; display: block; font-family: Verdana, cursive; text-align: center" href = "/">Вернуться на главную страницу</a>
 </body>
 </html>
