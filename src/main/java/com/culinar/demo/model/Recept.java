@@ -6,14 +6,16 @@ public class Recept {
     private String[] ingredients;
     private String[] preparation;
     private String[] recipe;
+    private String adding;
 
     public Recept(){;}
-    public Recept(int id, String head, String[] ingredients, String[] preparation, String[] recipe) {
+    public Recept(int id, String head, String[] ingredients, String[] preparation, String[] recipe, String adding) {
         this.id = id;
         this.head = head;
         this.ingredients = ingredients;
         this.preparation = preparation;
         this.recipe = recipe;
+        this.adding = adding;
     }
 
     public int getId() {
@@ -56,19 +58,12 @@ public class Recept {
         this.recipe = recipe;
     }
 
-    public void cook(String a) {
-        String b;
-        switch (a) {
-            case "Carrot":
-                b = "Link of recept with Carrot";
-                break;
-            case "Potato":
-                b = "Link of recept with Potato";
-                break;
-            default:
-                b = "Link with your ingredient not exist";
-        }
+    public String getAdding() {
+        return adding;
+    }
 
+    public void setAdding(String adding) {
+        this.adding = adding;
     }
 
 }
