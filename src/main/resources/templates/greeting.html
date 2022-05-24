@@ -1,12 +1,211 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Кулинарная дужка</title>
+    <style>
+        H1 {
+            font-size: 150%;
+            font-family: Comic Sans MS, fantasy;
+            color: Honeydew;
+        }
+        H2 {
+            font-size: 135%;
+            font-family: "Arial Black", sans-serif;
+            color: black;
+        }
+        .my_button {
+            width: 140px;
+            height: 70px;
+            font-size: 100%;
+            background-color: aquamarine;
+            color: mediumseagreen;
+        }
+        .my_link {
+            color: darkslateblue;
+            font-size: 100%;
+            display: block;
+            text-align: center;
+            font-family: Verdana, cursive;
+        }
+        .checkbox {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        cb {
+            display: inline-block;
+            text-align: center;
+            list-style: none;
+            width : 230px;
+            height: 50px;
+            font-size: 115%;
+            font-family: comic sans ms;
+        }
+        c2 {
+            display: inline-block;
+            text-align: center;
+            list-style: none;
+            width : 600px;
+            height: 50px;
+            font-size: 115%;
+            font-family: comic sans ms;
+        }
+        c3 {
+            display: inline-block;
+            text-align: center;
+            list-style: none;
+            width : 370px;
+            height: 50px;
+            font-size: 115%;
+            font-family: comic sans ms;
+        }
+    </style>
+
+    <script>
+        function getCheckedCheckBoxes() {
+            var checkboxes = document.getElementsByClassName('checkbox');
+            var checkboxesChecked = [];
+            for (var index = 0; index < checkboxes.length; index++) {
+                if (checkboxes[index].checked) {
+                    checkboxesChecked.push(checkboxes[index].value);
+                    alert(checkboxes[index].value);
+                }
+            }
+            return checkboxesChecked;
+        }
+    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-<p th:text="'Добро пожаловать в Кулинарную Дужку!'" />
-<p th:text="'Здесь вы можете найти блюдо, которое можно приготовить из того, что у вас есть в доме'" />
-<a href="/">Найти рецепт</a>
+<body th:bgcolor="PaleGreen">
+<h1 th:align="center" th:text="'Добро пожаловать в Кулинарную Дужку!'" /><br/>
+<h1 th:align="center" th:text="'Здесь вы можете найти блюдо, которое можно приготовить из того, что имеется, не выходя из дома!'" />
+<h1 th:align="center" th:text="'Наберите в корзинку все ингредиенты, которые есть у вас в доме, чтобы узнать, что можно приготовить из имеющихся продуктов.'"/><br/>
+<br/>
+
+<form method="POST">
+    <div class="checkbox">
+    <cb><input type="checkbox" name= "ingredients" value="Орехи" id="100">Орехи</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Грибы" id="101">Грибы</input></cb>
+    <cb><input type="checkbox" checked name= "ingredients" value="Мука" id="102">Мука</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Хлеб" id="103">Хлеб</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Макарон" id="47">Макароны</input></cb>
+    <c2><input type="checkbox" name= "ingredients" value="Крабовые палочки" id="106">Крабовые палочки</input></c2>
+    <c2><input type="checkbox" name= "ingredients" value="Felix" id="107">Felix</input></c2>
+    <br/>
+        </div>
+    <h2 th:text="'Обязательно в приготовлении:'"/>
+    <div class="checkbox">
+    <cb><input type="checkbox" checked name= "ingredients" value="Соль" id="1" >Соль</input> </cb>
+    <cb><input type="checkbox" checked name= "ingredients" value="Растительное масло" id="2">Растительное масло</input></cb>
+    <cb><input type="checkbox" checked name= "ingredients" value="Вода" id="3">Вода</input></cb>
+    <cb><input type="checkbox" checked name= "ingredients" value="Яйц" id="4">Яица</input></cb><br/>
+    </div>
+        <h2 th:text="'Овощи:'" />
+    <div class="checkbox">
+    <cb><input type="checkbox" name= "ingredients" value="Помидор" id="5">Помидоры</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Морковь" id="6">Морковь</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Картофель" id="7">Картофель</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Огур" id="8">Огурцы</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Лук репчатый" id="9">Лук репчатый</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Свекла" id="10">Свекла</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Перец (сладкий)" id="11">Сладкий перец</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Капуста" id="12">Капуста белокочанная</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Цветная капуста" id="13">Цветная капуста</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Кабач" id="14">Кабачки</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Баклажан" id="15">Баклажаны</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Тыква" id="16">Тыква</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Красный лук" id="17">Красный лук</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Чеснок" id="18">Чеснок</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Редис" id="19">Редис</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Кукуруза" id="20">Кукуруза</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Зелёный гороx" id="21">Зелёный горошек</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Пекинская капуста" id="22">Пекинская капуста</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Салат" id="23">Салат</input></cb><br/>
+    </div>
+    <h2 th:text="'Рыба:'" />
+    <div class="checkbox">
+    <cb><input type="checkbox" name= "ingredients" value="Лосось" id="24">Лосось</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Треска" id="25">Треска</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Окунь" id="26">Окунь</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Горбуша" id="27">Горбуша</input></cb><br/>
+    </div>
+    <h2 th:text="'Мясо:'" />
+    <div class="checkbox">
+    <cb><input type="checkbox" name= "ingredients" value="Фарш" id="28">Фарш</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Говядина" id="29">Говядина</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Свинина" id="30">Свинина</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="рёбрышки" id="31">Свиные рёбрышки</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Печень" id="32">Печень</input></cb><br/>
+    </div>
+    <h2 th:text="'Крупы:'"/>
+    <div class="checkbox">
+    <cb><input type="checkbox" name= "ingredients" value="Рис" id="39">Рис</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Греч" id="40">Гречка</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Геркулес" id="41">Геркулес</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Пшено" id="42">Пшено</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Горох" id="43">Горох</input></cb>
+    <c3><input type="checkbox" name= "ingredients" value="Булгур" id="44">Булгур</input></c3>
+    <c3><input type="checkbox" name= "ingredients" value="Перлов" id="45">Перловая крупа</input></c3>
+    <c3><input type="checkbox" name= "ingredients" value="Манная" id="46">Манная крупа</input></c3>
+    <br/>
+    </div>
+    <h2 th:text="'Фрукты:'" />
+    <div class="checkbox">
+    <cb><input type="checkbox" name= "ingredients" value="Лимон" id="48">Лимон</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Ябло" id="49">Яблоки</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Банан" id="50">Бананы</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Апельсин" id="51">Апельсины</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Авокад" id="52">Авокадо</input></cb>
+    </div>
+    <h2 th:text="'Молочные продукты:'"/>
+    <div class="checkbox">
+    <cb><input type="checkbox" checked name= "ingredients" value="Сливочное масло" id="54">Сливочное масло</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Сыр" id="55">Сыр</input></cb>
+    <cb><input type="checkbox" checked name= "ingredients" value="Молоко" id="56">Молоко</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Сливки" id="57">Сливки</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Творожный сыр" id="58">Творожный сыр</input></cb>
+    <c2><input type="checkbox" name= "ingredients" value="Творог" id="59">Творог</input></c2>
+    <c2><input type="checkbox" name= "ingredients" value="Сметана" id="80">Сметана</input></c2><br/>
+    </div>
+    <h2 th:text="'Сладкое:'"/>
+    <div class="checkbox">
+    <cb><input type="checkbox" checked name= "ingredients" value="Сахар" id="60">Сахар</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Шоколад" id="61">Шоколад</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Мёд" id="62">Мёд</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Какао" id="63">Какао</input></cb><br/>
+    </div>
+    <h2 th:text="'Добавки: травы, специи, соусы:'" />
+    <div class="checkbox">
+    <cb><input type="checkbox" name= "ingredients" value="Шпинат" id="64">Шпинат</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Зелёный лук" id="65">Зелёный лук</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Мята" id="66">Мята</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Зелень" id="67">Петрушка/укроп</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Кинза" id="68">Кинза</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Щавель" id="69">Щавель</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Крапива" id="70">Крапива</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Лавровый" id="71">Лавровый лист</input></cb>
+    <cb><input type="checkbox" checked name= "ingredients" value="молотый" id="72">Перец Молотый</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Корица" id="73">Корица</input></cb>
+    <c3><input type="checkbox" checked name= "ingredients" value="Майонез" id="81">Майонез</input></c3>
+    <c3><input type="checkbox" name= "ingredients" value="Соевый соус" id="82">Соевый соус</input></c3>
+    <c3><input type="checkbox" name= "ingredients" value="Томатная паста" id="74">Томатная паста</input></c3><br/>
+    </div>
+    <h2 th:text="'Для выпечки:'" />
+    <div class="checkbox">
+    <cb><input type="checkbox" name= "ingredients" value="посыпка" id="75">Кондитерская посыпка</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Глазурь" id="76">Глазурь</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Дрожжи" id="77">Дрожжи</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="Разрыхлитель" id="78">Разрыхлитель теста</input></cb>
+    <cb><input type="checkbox" name= "ingredients" value="пудра" id="79">Сахарная пудра</input></cb><br/>
+
+    <c2><input type="checkbox" name= "ingredients" value="сухари" id="104">Панировочный сухари</input></c2>
+    <c2><input type="checkbox" name= "ingredients" value="Лаваш" id="105">Лаваш</input></c2><br/>
+
+    <p th:align="center"><input type="submit" value="Искать" class="my_button"></p>
+    <p th:align="center"><input type="reset" value="Сбросить выбор" class="my_button"></p>
+</div>
+</form>
+<h1 th:text="'Или найдите блюдо себе по вкусу из подборки простых повседневных рецептов:'" />
+<a class="my_link" href="/allRecipes">Найти рецепт</a>
 </body>
 </html>
