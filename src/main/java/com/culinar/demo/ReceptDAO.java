@@ -1,21 +1,21 @@
 package com.culinar.demo;
 
 import com.culinar.demo.model.Recept;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 @Component
 public class ReceptDAO {
-    private static int count = 0;
+    //private static int count = 0;
     private static final String URL = "jdbc:postgresql://localhost:5431/postgres";
     private static final String username = "evgenia.udalova";
     private static final String password = "";
-    private static Connection connection;
+    private static final Connection connection;
     private static boolean flag;
+    private static final short limit = 4;
 
 
     static {
@@ -30,7 +30,7 @@ public class ReceptDAO {
         return flag;
     }
 
-    public List<Recept> index() throws SQLException {
+    public List<Recept> index() {
         List<Recept> recipes = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -103,7 +103,7 @@ public class ReceptDAO {
     }
 
     public List<Recept> searchByIngredients(String[] ingredients) {
-        this.flag = false;
+        flag = false;
 
         Array dataIngredients;
         String[] str_ingredients;
@@ -128,14 +128,10 @@ public class ReceptDAO {
                 id = rs.getInt("id");
                 dataIngredients = rs.getArray("ingredients");
                 str_ingredients = (String[]) dataIngredients.getArray();
-                for (String i : str_ingredients) {
-                    products.add(i);
-                }
+                Collections.addAll(products, str_ingredients);
 
                 userIngredients = new ArrayList<>();
-                for (String i : ingredients) {
-                    userIngredients.add(i);
-                }
+                Collections.addAll(userIngredients, ingredients);
                 /*PreparedStatement preparedStatement = connection.prepareStatement("" +
                         "Select * " +
                         "from   recept " +
@@ -145,51 +141,49 @@ public class ReceptDAO {
                 /*for (int i = 0; i < ingredients.length; i++) {
                     products.add(ingredients[i]);
                 }
-
                 Log log = LogFactory.getLog(this.getClass());
                 String x = "";
                 log.info(x);
                  for(String i : ingredients){
                     x = x.concat(i).concat(",");
                  }*/
-                    for (int j = 0; j < products.size(); j++) {
-                        //int counter = 0;
+                for (int j = 0; j < products.size(); j++) {
+                    //int counter = 0;
 
-                        for (int k = 0; k < userIngredients.size(); k++) {
-                            String s = userIngredients.get(k);
-                            if (products.get(j).contains(s)) {
-                                products.remove(j);
-                                userIngredients.remove(k);
-                                k--;
-                                j--;
-                                break;
-                            }else if (products.get(j).contains("по желанию")){
-                                products.remove(j);
-                                j--;
-                                break;
-                            }
-                        }
-                        if (products.isEmpty()) {
-                            idOfRecipes.add(id);
-                            this.flag = true;
+                    for (int k = 0; k < userIngredients.size(); k++) {
+                        String s = userIngredients.get(k);
+                        if (products.get(j).contains(s)) {
+                            products.remove(j);
+                            userIngredients.remove(k);
+                            j--;
+                            break;
+                        }else if (products.get(j).contains("по желанию")){
+                            products.remove(j);
+                            j--;
                             break;
                         }
                     }
-                    if ((products.size() < 4) & (!this.flag)) {
-                            idOfSimilarRecipes.add(id);
-                            for(String i : products){
-                                x = x.concat(i).concat("; ");
-                            }
-                            String message = "Необходимо добавить следующие ингредиенты: " + x;
-                            PreparedStatement ps = connection.prepareStatement("" +
-                                    "UPDATE recept " +
-                                    "SET adding = ? " +
-                                    "WHERE id = ?;");
-
-                            ps.setString(1, message);
-                            ps.setInt(2, id);
-                            ps.executeUpdate();
+                    if (products.isEmpty()) {
+                        idOfRecipes.add(id);
+                        flag = true;
+                        break;
                     }
+                }
+                if ((products.size() < limit) & (!flag)) {
+                    idOfSimilarRecipes.add(id);
+                    for(String i : products){
+                        x = x.concat(i).concat("; ");
+                    }
+                    String message = "Необходимо добавить следующие ингредиенты: " + x;
+                    PreparedStatement ps = connection.prepareStatement("" +
+                            "UPDATE recept " +
+                            "SET adding = ? " +
+                            "WHERE id = ?;");
+
+                    ps.setString(1, message);
+                    ps.setInt(2, id);
+                    ps.executeUpdate();
+                }
 
                 /*if (findingRecipes.isEmpty()) {
                     this.flag = false;
@@ -201,26 +195,21 @@ public class ReceptDAO {
                         recept = new Recept();
                         recept.setId(resultSet.getInt("id"));
                         recept.setHead(resultSet.getString("head"));
-
                         recept.setImage("![](../../../../resources/images/" + resultSet.getString(6) + ")");
-
                         Array food = resultSet.getArray(3);
                         String[] str_ingredients = (String[]) food.getArray();
                         recept.setIngredients(str_ingredients);
-
                         Array preparation = resultSet.getArray(4);
                         String[] str_preparation = (String[]) preparation.getArray();
                         recept.setPreparation(str_preparation);
-
                         Array recipe = resultSet.getArray(5);
                         String[] str_recipe = (String[]) recipe.getArray();
                         recept.setRecipe(str_recipe);
-
                         findingRecipes.add(recept);
                     }
                 }*/
             }
-            if (this.flag) {
+            if (flag) {
                 for (int number : idOfRecipes) {
                     findingRecipes.add(this.show(number));
                 }

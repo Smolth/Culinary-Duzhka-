@@ -11,20 +11,42 @@
         }
 
         .my_link {
-            color: DarkGreen;
             font-size: 120%;
             font-family: "Times New Roman", serif;
             line-height: 1.5;
         }
+        .my_gif{
+            position: absolute;
+            top: 30%;
+            left: 60%;
+            width:350px;
+            height:250px;;
+            font-size: 120%;
+            font-family: "Times New Roman", serif;
+            line-height: 1.5;
+        }
+        .my_gif{
+            position: absolute;
+            top: 30%;
+            left: 60%;
+            width:350px;
+            height:250px;
+            transform: translate(-50%, 0);
+            padding: 10px;
+            background: darkblue;
+        }
     </style>
 </head>
 <body th:bgcolor="PowderBlue">
+<p><a th:name="top"></a></p>
 <h2 th:align="center" th:text="'Список рецептов:'">Value</h2>
+<img class="my_gif" th:src="@{img/milk.gif}">
 <div class="my_link" th:each="recept : ${recipes}">
-    <a style="text-decoration: underline; text-decoration: none;" th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
+    <a style="text-decoration: underline; text-decoration: none; color: DarkGreen" th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
 </div>
 <br/>
 <br/>
 <a style="font-size: 120%; color: darkslateblue; display: block; font-family: Verdana, cursive; text-align: center" href = "/">Вернуться на главную страницу</a>
+<p><a style="font-size: 120%; color: darkslateblue; display: block; font-family: Verdana, cursive; text-align: center" href="#top">Наверх</a></p>
 </body>
 </html>

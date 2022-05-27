@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Поиск не дал результатов</title>
+    <style>
+        BODY {
+            background: url(/img/notFoundIngredients.png);
+            background-size: 100%;/* Путь к графическому файлу со вторым фоном */
+        }
+        H1 {
+            position: absolute;
+            top: 0%;
+            left: 50%;
+            width: 70%;
+            text-align: center;
+            transform: translate(-50%, 0);
+            font-family: "Arial Black", sans-serif;
+            color: darkblue;
+        }
+        .my_link {
+            color: aliceblue;
+            font-size: 130%;
+            font-family: Verdana;
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%, 0);
+        }
+    </style>
 </head>
 <body>
-
+<h1 th:text="'Весьма прескорбно, но мы не умеем готовить из воздуха, поэтому предлагаем вам всё же ввести какие-то ингредиенты, чтобы мы попробовали составить из них блюдо.'">text</h1>
+<a class="my_link" href = "/">Вернуться к выбору ингредиентов</a>
 </body>
 </html>

@@ -20,7 +20,7 @@
             font-size: 100%;
             font-family: "Verdana", cursive;
             display: inline-block;
-            width: 600px;
+            width: 400px;
             text-align: center;
         }
         .my_img{
@@ -36,7 +36,7 @@
     </style>
 </head>
 <body th:bgcolor="Lavender">
-
+<p><a th:name="top"></a></p>
 <h1 th:align="center" th:text="${recept.getHead()}">value</h1>
 <img th:src="@{${recept.getImage()}}" class="my_img" alt=""/>
 <h2 th:align="center" th:text="'Ингредиенты:'">VALUE</h2>
@@ -58,6 +58,7 @@
 <div >
     <a class="my_link" href = "/allRecipes">Перейти ко всем рецептам</a>
     <a class="my_link" href = "/">Вернуться на главную страницу</a>
+    <a class="my_link" href="#top">Наверх</a>
 </div>
 </body>
 </html>

@@ -31,7 +31,8 @@
     </style>
 </head>
 <body th:bgcolor="LightPink">
-<h1 th:text="'Кажется, у вас недостаточно продуктов для создания полноценного блюда, но мы подобрали рецепты блюд, которые пойдойдут вам, если добавить немного ингредиентов:'">Value</h1>
+<p><a th:name="top"></a></p>
+<h1 th:text="{$message}">Value</h1>
 <br/>
 <div th:each="recept : ${recipes}">
     <a class="my_link" style="text-decoration: underline; text-decoration: none;" th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
@@ -39,5 +40,6 @@
 </div>
 
 <a style="font-size: 120%; color: Purple; text-align: center; display: block; font-family: Verdana, cursive" href = "/">Вернуться на главную страницу</a>
+<p><a style="font-size: 120%; color: Purple; text-align: center; display: block; font-family: Verdana, cursive" href="#top">Наверх</a></p>
 </body>
 </html>

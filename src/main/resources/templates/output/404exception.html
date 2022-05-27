@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <style>
+        BODY {
+            background: url(/img/PageNotFound.jpeg);
+            background-size: 100%;/* Путь к графическому файлу со вторым фоном */
+        }
+        H1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            text-align: center;
+            transform: translate(-50%, 0);
+            font-family: "Arial Black", sans-serif;
+            color: darkblue;
+        }
+        H2 {
+            font-size: 130%;
+            font-variant: small-caps;
+            font-family: "Arial Hebrew", sans-serif;
+            color: firebrick;
+            text-align: center;
+        }
+        .my_link {
+            color: aliceblue;
+            font-size: 130%;
+            font-family: Verdana;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="Ой-ёй-ёй, это промах!">text</h1>
+<h1 th:text="Что-то пошло не так, но не повод огорчаться! Попробуйте вернуться на главную страничку и пометить галочками те ингредиенты, которые у вас есть, и затем нажать на кнопочку поиска, а мы в свою очередь попытаемся найти подходящий рецепт: ">text</h1>
+<p> <a class="my_link">link</a></p>
+<h2 th:text="404 - PageNotFound">value</h2>
+</body>
+</html>
