@@ -26,13 +26,13 @@
 
         }
         BODY {
-            background: url(/img/oboi.jpeg); /* Путь к графическому файлу со вторым фоном */
+            background: url(/img/oboi.jpeg) no-repeat, url(/img/kot-est-piccu.jpg) 0 800px no-repeat, url(/img/oboi2.jpg) 300px 6000px no-repeat ; /* Путь к графическому файлу со вторым фоном */
         }
     </style>
 </head>
 <body th:bgcolor="LightPink">
 <p><a th:name="top"></a></p>
-<h1 th:text="{$message}">Value</h1>
+<h1 th:text="${message}">Value</h1>
 <br/>
 <div th:each="recept : ${recipes}">
     <a class="my_link" style="text-decoration: underline; text-decoration: none;" th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>

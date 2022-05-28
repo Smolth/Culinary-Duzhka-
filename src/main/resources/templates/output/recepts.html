@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <title>Рецепты</title>
     <style>
@@ -15,15 +16,15 @@
             font-family: "Times New Roman", serif;
             line-height: 1.5;
         }
-        .my_gif{
+        .my_return {
             position: absolute;
-            top: 30%;
-            left: 60%;
-            width:350px;
-            height:250px;;
+            left: 50%;
+            transform: translate(-50%, 0);
             font-size: 120%;
-            font-family: "Times New Roman", serif;
-            line-height: 1.5;
+            color: coral;
+            display: block;
+            font-family: Verdana, cursive;
+            text-align: center
         }
         .my_gif{
             position: absolute;
@@ -35,18 +36,59 @@
             padding: 10px;
             background: darkblue;
         }
+        * {box-sizing: border-box;}
+        form {
+            position: absolute;
+            width: 300px;
+            top: 20%;
+            left: 60%;
+            transform: translate(-50%, 0);
+        }
+        input {
+            width: 100%;
+            height: 42px;
+            padding-left: 10px;
+            border: 2px solid #7BA7AB;
+            border-radius: 5px;
+            outline: none;
+            background: darkred;
+            color: blanchedalmond;
+
+        }
+
+        button {
+            position: absolute;
+            top: 20%;
+            right: 0px;
+            width: 42px;
+            height: 42px;
+            border: none;
+            background: indigo;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        button:before {
+            content: "\f002";
+            font-family: FontAwesome;
+            font-size: 16px;
+            color: yellow;
+        }
     </style>
 </head>
 <body th:bgcolor="PowderBlue">
 <p><a th:name="top"></a></p>
+<form th:action="@{/allRecipes}" method="post">
+    <p><input required th:maxlength="20" th:minlength="3" type="search" name="Word" placeholder="Введите ингредиент или название рецепта..."/>
+        <button type="submit"></button>
+</form>
 <h2 th:align="center" th:text="'Список рецептов:'">Value</h2>
 <img class="my_gif" th:src="@{img/milk.gif}">
-<div class="my_link" th:each="recept : ${recipes}">
+<div class="my_link" th:each ="recept : ${recipes}">
     <a style="text-decoration: underline; text-decoration: none; color: DarkGreen" th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
 </div>
 <br/>
 <br/>
-<a style="font-size: 120%; color: darkslateblue; display: block; font-family: Verdana, cursive; text-align: center" href = "/">Вернуться на главную страницу</a>
-<p><a style="font-size: 120%; color: darkslateblue; display: block; font-family: Verdana, cursive; text-align: center" href="#top">Наверх</a></p>
+<a style="bottom: 30px" class="my_return" href = "/">Вернуться на главную страницу</a>
+<a style="bottom: 0" class="my_return" href="#top">Наверх</a>
 </body>
 </html>

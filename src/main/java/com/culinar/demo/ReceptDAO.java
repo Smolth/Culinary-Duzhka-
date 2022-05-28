@@ -224,6 +224,39 @@ public class ReceptDAO {
             throw new RuntimeException(e);
         }
     }
+    public List<Recept> searchByWord(String head) {
+        List<Recept> recipes = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("Select id, head, ingredients from recept where head ilike (?) or array_to_string(ingredients, ', ') ilike  (?) ");
+            preparedStatement.setString(1,  '%' + head + '%' );
+            preparedStatement.setString(2,  '%' + head + '%' );
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                Recept recept = new Recept();
+
+                recept.setId(resultSet.getInt("id"));
+                recept.setHead(resultSet.getString("head"));
+
+
+                Array ingredients = resultSet.getArray("ingredients");
+                String[] str_ingredients = (String[]) ingredients.getArray();
+                recept.setIngredients(str_ingredients);
+
+                String x = "";
+                for(String i : str_ingredients){
+                    x = x.concat(i).concat("; ");
+                }
+
+                String message = "Необходимо добавить следующие ингредиенты: " + x;
+                recept.setAdding(message);
+
+                recipes.add(recept);
+            }
+            return recipes;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void save(Recept recipe) {
         try {
             PreparedStatement preparedStatement =

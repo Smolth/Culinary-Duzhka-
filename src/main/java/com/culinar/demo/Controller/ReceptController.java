@@ -1,6 +1,7 @@
 package com.culinar.demo.Controller;
 
 import com.culinar.demo.ReceptDAO;
+import com.culinar.demo.model.Recept;
 import com.culinar.demo.repository.ReceptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ReceptController {
@@ -47,6 +50,26 @@ public class ReceptController {
             }
         } catch (NullPointerException e)
         {
+            return "output/notFound";
+        }
+    }
+    @PostMapping("/allRecipes")
+    public String findByWord(@RequestParam ("Word") String word, Model model) {
+        String message;
+        try {
+            List<Recept> receptList = receptDAO.searchByWord(word);
+            if (receptList.size() == 1) {
+                model.addAttribute("recipes", receptList.get(0));
+                return "output/recept";
+            } else {
+                if (receptList.isEmpty()) {
+                    message = "По данному запросу ничего не найдено.";
+                } else message = "Вот, что мы нашли по вашему запросу:";
+                model.addAttribute("recipes", receptList);
+                model.addAttribute("message", message);
+                return "output/recipes";
+            }
+        } catch (NullPointerException e){
             return "output/notFound";
         }
     }
