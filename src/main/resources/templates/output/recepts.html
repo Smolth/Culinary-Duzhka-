@@ -22,7 +22,6 @@
             transform: translate(-50%, 0);
             font-size: 120%;
             color: coral;
-            display: block;
             font-family: Verdana, cursive;
             text-align: center
         }
@@ -58,7 +57,6 @@
 
         button {
             position: absolute;
-            top: 20%;
             right: 0px;
             width: 42px;
             height: 42px;
@@ -83,12 +81,15 @@
 </form>
 <h2 th:align="center" th:text="'Список рецептов:'">Value</h2>
 <img class="my_gif" th:src="@{img/milk.gif}">
+<img style="top: 120%; width: auto" class="my_gif" th:src="@{img/ramen.gif}">
+<img style="top: 320%; width: auto" class="my_gif" th:src="@{img/MQC.gif}">
 <div class="my_link" th:each ="recept : ${recipes}">
     <a style="text-decoration: underline; text-decoration: none; color: DarkGreen" th:href="@{/{id}(id=${recept.getId()})}" th:text="${recept.getHead()}">head</a>
 </div>
 <br/>
 <br/>
-<a style="bottom: 30px" class="my_return" href = "/">Вернуться на главную страницу</a>
-<a style="bottom: 0" class="my_return" href="#top">Наверх</a>
+<a class="my_return" href = "/">Вернуться на главную страницу</a>
+<br/>
+<p><a class="my_return" href="#top">Наверх</a></p>
 </body>
 </html>

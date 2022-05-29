@@ -59,7 +59,7 @@ public class ReceptController {
         try {
             List<Recept> receptList = receptDAO.searchByWord(word);
             if (receptList.size() == 1) {
-                model.addAttribute("recipes", receptList.get(0));
+                model.addAttribute("recept", receptDAO.show(receptList.get(0).getId()));
                 return "output/recept";
             } else {
                 if (receptList.isEmpty()) {
