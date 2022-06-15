@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление рецепта</title>
+    <style>
+        H1 {
+            font-size: 140%;
+            font-family: "Arial", sans-serif;
+            color: mediumpurple;
+            text-align: center;
+        }
+        .my_return {
+            position: absolute;
+            transform: translate(-20%, 0);
+            left: 80%;
+            color: saddlebrown;
+            font-size: 125%;
+        }
+        LABEL {
+            text-align: center;
+            color: limegreen;
+            font-size: 130%;
+            display: block;
+        }
+        BODY{
+            background: url(/img/oboi5.jpg);
+            background-size: 100%;
+        }
+        BUTTON{
+            border-color: black;
+            background-color: grey;
+            color: darkorange;
+            height: 40px;
+            width: 200px;
+            font-size: 110%;
+            margin: 0 auto;
+            display: block;
+        }
+        textarea {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+
+</head>
+<body>
+<h1>Для того, чтобы добавить рецепт, впишите в соответсвующие поля название блюда, список ингредиентов для его приготовления, подготовительные инструкции к готовке, если они требуются, и сам рецепт блюда. Важное замечание: для корректной обработки рецепта необходимо писать пункты без перехода на новую строку, то есть нажатия символа "enter" </h1>
+<h1>Важное замечание: для корректной обработки рецепта необходимо писать пункты без перехода на новую строку, то есть нажатия символа "enter". </h1><br/>
+<br/>
+<form role="form" method="post" action="/add">
+    <div class="form-group">
+        <label for="head">
+            Введите заголовок
+        </label>
+        <br/>
+        <input required id="head" name="head" class="form-control" />
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="ingredients">
+            Введите список ингредиентов и с пропорциями их содержания в блюде, разделяя каждый ингредиент символом ";"
+        </label>
+        <br/>
+        <textarea required id="ingredients" name="ingredients" class="form-control"></textarea>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="preparation">
+            Введите подготовительную часть приготовления, разделяя каждый пункт символом ";"
+        </label>
+        <br/>
+        <textarea class="form-control" name="preparation" id="preparation"></textarea>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="recipe">
+            Введите инструкции приготовления по пунктам, разделяя их символом ";"
+        </label>
+        <br/>
+        <textarea required class="form-control" name="recipe" id="recipe"></textarea>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <button type="submit" class="btn btn-primary">
+        Добавить рецепт
+    </button>
+</form>
+<br/>
+<a class="my_return" href = "/">Вернуться на главную страницу</a>
+</body>
+</html>

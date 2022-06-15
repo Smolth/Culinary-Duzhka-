@@ -1,13 +1,17 @@
 package com.culinar.demo;
 
-import com.culinar.demo.model.Recept;
-import org.springframework.stereotype.Component;
+import com.culinar.demo.model.RecipeEntity;
+import com.culinar.demo.model.RecipeModel;
+import com.culinar.demo.repository.ReceptRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-@Component
+@Service
+@AllArgsConstructor
 public class ReceptDAO {
     //private static int count = 0;
     private static final String URL = "jdbc:postgresql://localhost:5431/postgres";
@@ -17,6 +21,7 @@ public class ReceptDAO {
     private static boolean flag;
     private static final short limit = 4;
 
+    ReceptRepository receptRepository;
 
     static {
         try {
@@ -30,15 +35,15 @@ public class ReceptDAO {
         return flag;
     }
 
-    public List<Recept> index() {
-        List<Recept> recipes = new ArrayList<>();
+    public List<RecipeEntity> index() {
+        List<RecipeEntity> recipes = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
             String SQL = "Select * from recept";
             ResultSet resultSet = statement.executeQuery(SQL);
 
             while (resultSet.next()) {
-                Recept recept = new Recept();
+                RecipeEntity recept = new RecipeEntity();
 
                 recept.setId(resultSet.getInt("id"));
                 recept.setHead(resultSet.getString("head"));
@@ -67,15 +72,15 @@ public class ReceptDAO {
         return recipes;
     }
 
-    public Recept show(int id) {
-        Recept recept = null;
+    public RecipeEntity show(int id) {
+        RecipeEntity recept = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("Select * from recept where id=?");
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                recept = new Recept();
+                recept = new RecipeEntity();
 
                 recept.setId(resultSet.getInt("id"));
                 recept.setHead(resultSet.getString("head"));
@@ -102,13 +107,13 @@ public class ReceptDAO {
         return recept;
     }
 
-    public List<Recept> searchByIngredients(String[] ingredients) {
+    public List<RecipeEntity> searchByIngredients(String[] ingredients) {
         flag = false;
 
         Array dataIngredients;
         String[] str_ingredients;
-        List<Recept> findingRecipes = new ArrayList<>();
-        List<Recept> similarRecipes = new ArrayList<>();
+        List<RecipeEntity> findingRecipes = new ArrayList<>();
+        List<RecipeEntity> similarRecipes = new ArrayList<>();
         ArrayList<Integer> idOfRecipes = new ArrayList<>();
         ArrayList<Integer> idOfSimilarRecipes = new ArrayList<>();
         ArrayList<String> userIngredients;
@@ -132,23 +137,8 @@ public class ReceptDAO {
 
                 userIngredients = new ArrayList<>();
                 Collections.addAll(userIngredients, ingredients);
-                /*PreparedStatement preparedStatement = connection.prepareStatement("" +
-                        "Select * " +
-                        "from   recept " +
-                        "where  ingredients " +
-                        "similar to '%?%';");*/
 
-                /*for (int i = 0; i < ingredients.length; i++) {
-                    products.add(ingredients[i]);
-                }
-                Log log = LogFactory.getLog(this.getClass());
-                String x = "";
-                log.info(x);
-                 for(String i : ingredients){
-                    x = x.concat(i).concat(",");
-                 }*/
                 for (int j = 0; j < products.size(); j++) {
-                    //int counter = 0;
 
                     for (int k = 0; k < userIngredients.size(); k++) {
                         String s = userIngredients.get(k);
@@ -184,30 +174,6 @@ public class ReceptDAO {
                     ps.setInt(2, id);
                     ps.executeUpdate();
                 }
-
-                /*if (findingRecipes.isEmpty()) {
-                    this.flag = false;
-                    PreparedStatement ps = connection.prepareStatement("Select * from recept where ingredients iLIKE any ?");
-                    ps.setString(1, "(" + products + ")");
-                    ResultSet rs = ps.executeQuery();
-                    while (resultSet.next() & (count < 8)) {
-                        count++;
-                        recept = new Recept();
-                        recept.setId(resultSet.getInt("id"));
-                        recept.setHead(resultSet.getString("head"));
-                        recept.setImage("![](../../../../resources/images/" + resultSet.getString(6) + ")");
-                        Array food = resultSet.getArray(3);
-                        String[] str_ingredients = (String[]) food.getArray();
-                        recept.setIngredients(str_ingredients);
-                        Array preparation = resultSet.getArray(4);
-                        String[] str_preparation = (String[]) preparation.getArray();
-                        recept.setPreparation(str_preparation);
-                        Array recipe = resultSet.getArray(5);
-                        String[] str_recipe = (String[]) recipe.getArray();
-                        recept.setRecipe(str_recipe);
-                        findingRecipes.add(recept);
-                    }
-                }*/
             }
             if (flag) {
                 for (int number : idOfRecipes) {
@@ -224,15 +190,15 @@ public class ReceptDAO {
             throw new RuntimeException(e);
         }
     }
-    public List<Recept> searchByWord(String head) {
-        List<Recept> recipes = new ArrayList<>();
+    public List<RecipeEntity> searchByWord(String head) {
+        List<RecipeEntity> recipes = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("Select id, head, ingredients from recept where head ilike (?) or array_to_string(ingredients, ', ') ilike  (?) ");
             preparedStatement.setString(1,  '%' + head + '%' );
             preparedStatement.setString(2,  '%' + head + '%' );
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
-                Recept recept = new Recept();
+                RecipeEntity recept = new RecipeEntity();
 
                 recept.setId(resultSet.getInt("id"));
                 recept.setHead(resultSet.getString("head"));
@@ -257,8 +223,17 @@ public class ReceptDAO {
             throw new RuntimeException(e);
         }
     }
-    public void save(Recept recipe) {
-        try {
+    public RecipeEntity save(RecipeModel model) {
+        RecipeEntity entity = new RecipeEntity();
+        entity.setHead(model.getHead());
+        entity.setImage("oneToManyImg.jpg");
+        entity.setIngredients(model.getIngredients());
+        entity.setPreparation(model.getPreparation());
+        entity.setRecipe(model.getRecipe());
+        //entity.setAdding("Nothing");
+        return receptRepository.save(entity);
+    }
+        /*try {
             PreparedStatement preparedStatement =
                     connection.prepareStatement("INSERT INTO Person VALUES(?, ?, ?, ?, ?, ?)");
 
@@ -279,5 +254,5 @@ public class ReceptDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
+    }*/
 }
